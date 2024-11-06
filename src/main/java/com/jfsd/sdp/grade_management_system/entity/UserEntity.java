@@ -1,8 +1,8 @@
 package com.jfsd.sdp.grade_management_system.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,7 +28,7 @@ public class UserEntity {
 	private long id;
 	
 	@Column(unique = true)
-	private String userName;
+	private String username;
 	
 	private String password;
 	
@@ -39,7 +39,7 @@ public class UserEntity {
 	@Column(unique  = true)
 	private String email;
 	
-	private LocalDate dateOfBirth;
+	private Date dateOfBirth;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private RoleEntity roleEntity;

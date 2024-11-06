@@ -33,6 +33,4 @@ public class SubmissionEntity {
 	@CreationTimestamp
 	private LocalDateTime submittedOn;
 	
-	@OneToMany(mappedBy = "submission")
-	private SubmissionEntity submitted;
 }
