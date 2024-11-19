@@ -27,4 +27,6 @@ public class CourseEntity {
 	@OneToMany(mappedBy = "courseEntity")
 	private List<AssignmentEntity> assignmentEntity = new ArrayList<>();
 	
+	private byte[] courseImage;
+	
 }
