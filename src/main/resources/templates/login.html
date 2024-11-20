@@ -3,16 +3,97 @@
 
 <head>
     <title>Login</title>
-	<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Apply background image */
+        body {
+           	background-image: url('images/image2.jpg'); /* Replace with your image URL */
+			background-size: cover; /* Ensure the image covers the entire viewport */
+			background-position: center; /* Center the background image */
+			background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+
+        /* Form container */
+        .login-form {
+            background-color: rgb(192, 192, 192); /* White background with transparency */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Input fields styles */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+			color: black; /* Ensure text inside inputs is black */
+            background-color: white;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff; /* Blue border on focus */
+        }
+
+        /* Submit button */
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Optional text below form */
+        .additional-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <form method="POST" action="#" th:action="@{/authenticate}">
-		<input type="text" name="username" placeholder="Username" />
-		<input type="password" name="password" placeholder="Password" />
-		<input type="submit" value="Submit" />
-	</form>
+    <form method="POST" action="#" th:action="@{/authenticate}" class="login-form">
+        <h2>Login</h2>
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <input type="submit" value="Submit" />
+        <div class="additional-text">
+            <p>Forgot your password? <a href="#">Reset it here</a></p>
+        </div>
+    </form>
 
 </body>
 

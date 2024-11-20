@@ -1,6 +1,5 @@
 package com.jfsd.sdp.grade_management_system.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,7 +34,8 @@ public class AssignmentEntity {
 	@ManyToOne
 	private CourseEntity courseEntity;
 	
-	private LocalDateTime deadLine;
+	@OneToMany(mappedBy = "assignment")
+	private List<DeadLineEntity> deadLine = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "assignmentEntity")
 	private List<SubmissionEntity> submissions = new ArrayList<>();

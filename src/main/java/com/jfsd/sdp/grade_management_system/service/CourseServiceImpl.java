@@ -1,10 +1,12 @@
 package com.jfsd.sdp.grade_management_system.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jfsd.sdp.grade_management_system.dao.CourseRepository;
 import com.jfsd.sdp.grade_management_system.entity.CourseEntity;
@@ -23,10 +25,9 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public CourseEntity createCourse(String courseName) {
-		CourseEntity course = new CourseEntity();
-		course.setCourseName(courseName);
-	     return courseRepository.save(course);
+	public CourseEntity createCourse(CourseEntity course)  {
+		
+	    return courseRepository.save(course);
 		
 	}
 
@@ -55,15 +56,12 @@ public class CourseServiceImpl implements CourseService {
 		if(course.isPresent()) {
 			theCourse = course.get();
 		}
-		else {
+		else 
+		{ 
 			throw new RuntimeException("Did not find user id - " + theCourse);
 		}
 		return theCourse;
 		
 		
-	} 
-	
-	
-	
-	
+	}	
 }

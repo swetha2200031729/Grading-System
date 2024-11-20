@@ -4,12 +4,14 @@
 <head>
     <title>Login</title>
 	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="css/main.css"/>
+	
 </head>
 
 <body>
-
+	
     <form method="post" action="#" th:action="@{/register}" th:object="${user}">
-		
+		<h1>Register Page </h1>
 		<input type="hidden" th:field="*{id}">
 		<input type="text" name="username" placeholder="Username" th:field="*{username}"/>
 		</br>

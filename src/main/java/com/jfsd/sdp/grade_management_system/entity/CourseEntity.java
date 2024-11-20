@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +27,10 @@ public class CourseEntity {
 	
 	@OneToMany(mappedBy = "courseEntity")
 	private List<AssignmentEntity> assignmentEntity = new ArrayList<>();
-	
+	   
+    @Lob // Specifies that this field should be treated as a large object (BLOB).
+    @Column(columnDefinition = "LONGBLOB") // Explicitly map to MySQL's LONGBLOB.
+
 	private byte[] courseImage;
 	
 }
