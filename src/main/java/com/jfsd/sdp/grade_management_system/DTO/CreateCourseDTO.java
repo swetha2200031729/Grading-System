@@ -1,4 +1,4 @@
-package com.jfsd.sdp.grade_management_system;
+package com.jfsd.sdp.grade_management_system.DTO;
 
 import java.io.IOException;
 

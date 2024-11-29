@@ -68,7 +68,7 @@
                     <a th:href="@{/courses/delete/{id}(id=${course.id})}" class="btn btn-danger btn-sm" 
                        onclick="return confirm('Are you sure you want to delete this course?')">Delete</a>
                     <!-- Go to Assignments Button -->
-                    <a href="#" class="btn btn-primary btn-sm">Go to Assignments</a>
+                    <a th:href="@{/assignments/list/{id}(id=${course.id})}" class="btn btn-primary btn-sm">Go to Assignments</a>
                 </div>
             </div>
         </div>

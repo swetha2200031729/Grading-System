@@ -8,9 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,4 +39,14 @@ public class AssignmentEntity {
 	
 	@OneToMany(mappedBy = "assignmentEntity")
 	private List<SubmissionEntity> submissions = new ArrayList<>();
+	
+	@Lob
+	@Column(columnDefinition = "LONGBLOB")
+	private byte[] assignmentQueFile;
+	
+	
+	
+	
+	
+	
 }

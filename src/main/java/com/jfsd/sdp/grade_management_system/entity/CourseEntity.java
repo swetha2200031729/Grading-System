@@ -30,7 +30,6 @@ public class CourseEntity {
 	   
     @Lob // Specifies that this field should be treated as a large object (BLOB).
     @Column(columnDefinition = "LONGBLOB") // Explicitly map to MySQL's LONGBLOB.
-
 	private byte[] courseImage;
 	
 }

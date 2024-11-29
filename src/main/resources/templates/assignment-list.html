@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assignment List</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+    <div style="width: 80%; margin: 20px auto; background: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
+        <h1 style="text-align: center; color: #333;">Assignments for Course </h1>
+
+        <a th:href="@{/assignments/show-create-assignment-form/{id}(id=${courseId})}" 
+           style="display: inline-block; padding: 10px 15px; background: #007BFF; color: #fff; text-decoration: none; border-radius: 3px; margin-bottom: 20px;">Create New Assignment</a>
+
+        <ul style="list-style: none; padding: 0;">
+            <li th:if="${assignments == null || assignments.isEmpty()}"
+                style="background: #f9f9f9; padding: 10px; border: 1px solid #ddd; border-radius: 3px;">
+                No assignments found.
+            </li>
+            <li th:each="assignment : ${assignments}" 
+                style="background: #f9f9f9; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 3px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: bold; color: #333;">[[${assignment.assignmentName}]]</span>
+                <span style="color: #555;">[[${assignment.assignmentDescription}]]</span>
+                <a th:href="@{'/assignments/show-assignment-details/' + ${assignment.id}}" 
+                   style="color: #007BFF; text-decoration: none;">View Details</a>
+				   
+				   <a th:href="@{'/assignments/delete-assignment/' + ${assignment.id}}" 
+				      style="color: rgb(255, 0, 0); text-decoration: none;">Delete</a> 
+				  
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

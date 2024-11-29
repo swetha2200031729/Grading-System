@@ -1,7 +1,5 @@
 package com.jfsd.sdp.grade_management_system.controller;
 
-
-
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jfsd.sdp.grade_management_system.CreateCourseDTO;
+import com.jfsd.sdp.grade_management_system.DTO.CreateCourseDTO;
 import com.jfsd.sdp.grade_management_system.entity.CourseEntity;
 import com.jfsd.sdp.grade_management_system.service.CourseService;
 

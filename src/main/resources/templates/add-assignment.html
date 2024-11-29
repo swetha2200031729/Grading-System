@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Assignment</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+    <div style="width: 80%; margin: 20px auto; background: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
+        <h1 style="text-align: center; color: #333;">Create Assignment</h1>
+
+        <form th:action="@{/assignments/create-assignment-form}" th:object="${assignment}" method="post" enctype="multipart/form-data"
+              style="display: flex; flex-direction: column;">
+            <input type="hidden" th:value="${assignment.course.id}" name="course.id">
+
+            <label for="assignmentName" style="margin: 10px 0 5px; color: #333; font-weight: bold;">Assignment Name:</label>
+            <input type="text" id="assignmentName" name="assignmentName" placeholder="Enter assignment name" required
+                   style="padding: 10px; font-size: 1rem; border: 1px solid #ddd; border-radius: 3px;" th:field="${assignment.assignmentName}">
+
+            <label for="assignmentDescription" style="margin: 10px 0 5px; color: #333; font-weight: bold;">Description:</label>
+            <textarea id="assignmentDescription" name="assignmentDescription" placeholder="Enter assignment description" required
+                      style="padding: 10px; font-size: 1rem; border: 1px solid #ddd; border-radius: 3px;"  th:field="${assignment.assignmentDescription}"></textarea>
+
+           <label for="deadLine" style="margin: 10px 0 5px; color: #333; font-weight: bold;">Deadline:</label>
+            <input type="datetime-local" id="deadLine" name="deadLine"  required
+                   style="padding: 10px; font-size: 1rem; border: 1px solid #ddd; border-radius: 3px;" th:field="${assignment.deadLine}"> 
+
+            <label for="assignmentQueFile" style="margin: 10px 0 5px; color: #333; font-weight: bold;">Upload Question File:</label>
+            <input type="file" id="assignmentQueFile" name="assignmentQueFile" required th:field="${assignment.assignmentQueFile}"
+                   style="padding: 10px; font-size: 1rem; border: 1px solid #ddd; border-radius: 3px;">
+
+            <div style="margin-top: 20px;">
+                <button type="submit" 
+                        style="padding: 10px 15px; font-size: 1rem; background: #007BFF; color: #fff; border: none; border-radius: 3px; cursor: pointer;">Submit</button>
+                <a th:href="@{'/assignments/list/' + ${assignment.course.id}}" 
+                   style="padding: 10px 15px; font-size: 1rem; background: #ccc; color: #333; text-decoration: none; border-radius: 3px; margin-left: 10px;">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
