@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Grade Details</title>
+</head>
+<body>
+    <h1>Grade Details</h1>
+
+    <!-- Grade Details -->
+    <div>
+        <p><strong>Grade ID:</strong> <span th:text="${grade.id}"></span></p>
+        <p><strong>Submission ID:</strong> <span th:text="${grade.submission.id}"></span></p>
+        <p><strong>Graded By:</strong> <span th:text="${grade.gradedBy.username}"></span></p>
+        <p><strong>Score:</strong> <span th:text="${grade.grade} + '/ 100'"></span></p>
+        <p><strong>Feedback:</strong></p>
+        <p th:text="${grade.feedback}"></p>
+    </div>
+
+    <!-- Navigation Links -->
+    <div>
+        <!-- Link to Submission Details -->
+        <a th:href="@{'/assignments/faculty/show-assignment-details/' + ${grade.submission.assignmentEntity.id}}">Back to Assignment Page</a>
+        <br>
+        <!-- Link to Edit Grade -->
+        <a th:href="@{'/grades/update-grade-form/' + ${grade.id}}">Edit Grade</a>
+    </div>
+</body>
+</html>

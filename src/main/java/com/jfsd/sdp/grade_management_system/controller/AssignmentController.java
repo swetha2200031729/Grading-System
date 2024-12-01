@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,11 @@ public class AssignmentController{
 		@Autowired
 		private SubmissionService submissionService;
 		
+		private boolean isUserFaculty() {
+			return SecurityContextHolder.getContext()
+					.getAuthentication().getAuthorities()
+					.contains(new SimpleGrantedAuthority("Faculty"));
+		}
 		
 		@GetMapping("/list/{id}")
 		public String getAssignmentList(Model model , @PathVariable("id") long courseId) {
@@ -56,7 +62,6 @@ public class AssignmentController{
 		
 		@GetMapping("/show-create-assignment-form/{id}")
 		public String showCreateAssignmentForm(Model model , @PathVariable("id") long courseId) {
-			
 			CreatAssignmentDTO cr = new CreatAssignmentDTO();
 			
 			  CourseEntity ce =  courseService.findById(courseId);
@@ -70,10 +75,7 @@ public class AssignmentController{
 		
 		
 		@PostMapping("/create-assignment-form")
-		public String createAssignment(@ModelAttribute CreatAssignmentDTO assignment, @AuthenticationPrincipal UserDetails user) throws IOException {
-			
-			UserEntity u = userService.findUserByUsername(user.getUsername()); // get user details
-			
+		public String createAssignment(@ModelAttribute CreatAssignmentDTO assignment, @AuthenticationPrincipal UserDetails user) throws IOException {			
 			AssignmentEntity as = null;
 			 try {
 				 	as  = assignmentSerivce.createAssignment(assignment);
@@ -98,6 +100,9 @@ public class AssignmentController{
 		
 		@GetMapping("/show-assignment-details/{id}")
 		public String showAssignmentDetails(Model model , @PathVariable long id) {
+			if (isUserFaculty()) {
+				return "redirect:/assignments/faculty/show-assignment-details/" + id;
+			}
 			AssignmentEntity assignmentDetails=  assignmentSerivce.findById(id);
 			UserEntity user = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 			SubmissionEntity submissionEntity = submissionService.findSubmissionByUserAndAssignment(user, assignmentDetails);
@@ -140,11 +145,7 @@ public class AssignmentController{
 		@PostMapping("/submit-assignment")
 		public String submitAssignment(
 		        @ModelAttribute CreateSubmissionDTO submission) throws IOException {
-
-		    SubmissionEntity se = submissionService.createSubmission(submission);
 		    return "redirect:/assignments/show-assignment-details/" + submission.getAssignmentEntity().getId();
-		    
-		  
 		}
 
 		@GetMapping("/submissions/file/{id}")
@@ -161,6 +162,9 @@ public class AssignmentController{
 					.contentType(MediaType.APPLICATION_PDF)
 					.body(se.getSubmissionAnsFile());
 		}
+		
+		
+		
 		
 		
 }

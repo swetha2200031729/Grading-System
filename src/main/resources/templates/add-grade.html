@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add/Edit Grade</title>
+</head>
+<body>
+    <!-- Header Based on Action -->
+    <h1>Add Grade</h1>
+
+    <!-- Grade Form -->
+    <form th:object="${grade}" th:action="@{/grades/create-grade-form}" method="post">
+
+        <!-- Submission Information (Read-Only) -->
+        <p>
+            <strong>Submission ID:</strong>
+            <span th:text="${grade.submission.id}"></span>
+			<input type="hidden" th:field="${grade.submission.id}" />
+        </p>
+
+        <!-- Grade Input -->
+        <label for="grade">Grade (0-100):</label>
+        <input type="number" id="grade" name="grade" th:value="${grade.grade}" min="0" max="100" required />
+        <br><br>
+
+        <!-- Feedback -->
+        <label for="feedback">Feedback:</label>
+        <textarea id="feedback" name="feedback" th:text="${grade.feedback}" placeholder="Enter feedback"></textarea>
+        <br><br>
+
+        <!-- Submit Button -->
+        <button type="submit">Save</button>
+    </form>
+
+    <!-- Back to Submission Details -->
+    <br>
+    <a th:href="@{'/assignments/faculty/show-assignment-details/' + ${grade.submission.assignmentEntity.id}}">Back to Submission Details</a>
+</body>
+</html>

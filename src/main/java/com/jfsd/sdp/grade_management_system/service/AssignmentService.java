@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.jfsd.sdp.grade_management_system.DTO.CreatAssignmentDTO;
 import com.jfsd.sdp.grade_management_system.entity.AssignmentEntity;
-import com.jfsd.sdp.grade_management_system.entity.CourseEntity;
 
 public interface AssignmentService {
 
