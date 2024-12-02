@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jfsd.sdp.grade_management_system.DTO.CreateCourseRegistrationDTO;
 import com.jfsd.sdp.grade_management_system.entity.AssignmentEntity;
 import com.jfsd.sdp.grade_management_system.entity.CourseEntity;
 
@@ -15,10 +16,10 @@ public interface CourseService {
 	CourseEntity findById(long id);
 	
 	List<CourseEntity> findAll();
-	
+	 
 	void deleteById(long id);
 
 	CourseEntity createCourse(CourseEntity course) throws IOException;
 	
-	
+	void userRegistration(List<CreateCourseRegistrationDTO> registrations);
 }

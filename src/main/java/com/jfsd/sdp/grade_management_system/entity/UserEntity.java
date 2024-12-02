@@ -13,6 +13,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
@@ -55,5 +58,12 @@ public class UserEntity {
 	
 	@OneToMany(mappedBy = "gradedBy",cascade = CascadeType.REMOVE)
 	private List<GradeEntity> grades = new ArrayList<>();
-
+	
+	@ManyToMany
+	@JoinTable(
+		    name = "user_course", // Name of the join table
+		    joinColumns = @JoinColumn(name = "user_id"), // Foreign key column for UserEntity
+		    inverseJoinColumns = @JoinColumn(name = "course_id") // Foreign key column for CourseEntity
+		)
+	private List<CourseEntity> enrolledCourses = new ArrayList<>();
 }

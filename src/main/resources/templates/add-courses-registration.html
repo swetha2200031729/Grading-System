@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload Course Registration</title>
+</head>
+<body>
+    <h1>Upload Course Registration File</h1>
+
+    <!-- Success or error message -->
+    <div th:if="${message}">
+        <p th:text="${message}" style="color: green;"></p>
+    </div>
+
+    <!-- Form for file upload -->
+    <form th:action="@{/registrations/upload-registration-file}"  th:object="${uploadForm}" method="post" enctype="multipart/form-data">
+        <label for="file">Select File:</label>
+        <input type="file" th:field="*{file}"id="file" name="file" required>
+        <br><br>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jfsd.sdp.grade_management_system.DTO.CreateCourseDTO;
+import com.jfsd.sdp.grade_management_system.dao.UserRepository;
 import com.jfsd.sdp.grade_management_system.entity.CourseEntity;
+import com.jfsd.sdp.grade_management_system.entity.UserEntity;
 import com.jfsd.sdp.grade_management_system.service.CourseService;
 
 @Controller
@@ -25,12 +28,20 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
     
-   
+    @Autowired
+    private UserRepository userRepository;
     
     @GetMapping("/list")
     public String getAllCourses(Model model) {
-    	
-        model.addAttribute("courses", courseService.findAll());
+    // here get the currently logged in user and fetch user by username
+    	// then find enrolled courses and display them 
+    	String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		UserEntity user = userRepository.findByUsername(username);
+		 if (user == null) {
+	            throw new RuntimeException("User not found: " + username);
+	        }
+		 
+        model.addAttribute("courses", user.getEnrolledCourses());
         return "course-list";
     }
 

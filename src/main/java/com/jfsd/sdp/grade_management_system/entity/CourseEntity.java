@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,4 +33,6 @@ public class CourseEntity {
     @Column(columnDefinition = "LONGBLOB") // Explicitly map to MySQL's LONGBLOB.
 	private byte[] courseImage;
 	
+    @ManyToMany (mappedBy = "enrolledCourses")
+    private List<UserEntity> usersRegistered = new ArrayList<>();
 }

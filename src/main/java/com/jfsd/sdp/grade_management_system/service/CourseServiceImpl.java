@@ -1,19 +1,23 @@
 package com.jfsd.sdp.grade_management_system.service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.jfsd.sdp.grade_management_system.DTO.CreateCourseRegistrationDTO;
 import com.jfsd.sdp.grade_management_system.dao.CourseRepository;
+import com.jfsd.sdp.grade_management_system.dao.UserRepository;
 import com.jfsd.sdp.grade_management_system.entity.CourseEntity;
+import com.jfsd.sdp.grade_management_system.entity.UserEntity;
 
 @Service
 public class CourseServiceImpl implements CourseService {
 	
+	@Autowired
+	private UserRepository userRepository;
 	@Autowired
 	private CourseRepository courseRepository;
 
@@ -63,5 +67,25 @@ public class CourseServiceImpl implements CourseService {
 		return theCourse;
 		
 		
-	}	
+	}
+
+	@Override
+	@Transactional
+	public void userRegistration(List<CreateCourseRegistrationDTO> registrations) {
+		System.out.println("Whaat" + registrations.size());
+		registrations.forEach(registration -> {
+			long studentId = Long.parseLong(String.valueOf(registration.getStudentId()));
+			long courseId = Long.parseLong(String.valueOf(registration.getCourseId()));
+
+			CourseEntity ce =  courseRepository.findById(courseId).get();
+			UserEntity ue = userRepository.findById(studentId).get();
+			ue.getEnrolledCourses().add(ce);
+			// Note: join table side u should do the save
+			userRepository.save(ue);
+			System.out.println("DUDEEEEEEE");
+		} );
+		courseRepository.flush();
+		
+	}
+	
 }
