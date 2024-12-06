@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.jfsd.sdp.grade_management_system.DTO.CreateGradeDTO;
 import com.jfsd.sdp.grade_management_system.dao.GradeRepository;
-import com.jfsd.sdp.grade_management_system.dao.SubmissionRepository;
 import com.jfsd.sdp.grade_management_system.dao.UserRepository;
 import com.jfsd.sdp.grade_management_system.entity.GradeEntity;
 import com.jfsd.sdp.grade_management_system.entity.UserEntity;
@@ -19,9 +18,6 @@ public class GradeServiceImpl implements GradeService{
 
 	@Autowired
 	private GradeRepository gradeRepository;
-	
-	@Autowired
-	private SubmissionRepository submissionRepository;
 	
 	@Autowired
 	private UserRepository userRepository;

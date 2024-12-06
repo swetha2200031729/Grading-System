@@ -13,7 +13,6 @@ import com.jfsd.sdp.grade_management_system.dao.AssignmentRepository;
 import com.jfsd.sdp.grade_management_system.dao.DeadLineRepository;
 import com.jfsd.sdp.grade_management_system.dao.UserRepository;
 import com.jfsd.sdp.grade_management_system.entity.AssignmentEntity;
-import com.jfsd.sdp.grade_management_system.entity.DeadLineEntity;
 import com.jfsd.sdp.grade_management_system.entity.UserEntity;
 
 @Service
@@ -75,7 +74,7 @@ public class AssignmentServiceImp implements AssignmentService{
         AssignmentEntity as =   assignmentRepository.save(assignment.toEntity(user));
         assignmentRepository.flush();
         
-        DeadLineEntity de = deadLineRepository.save(assignment.toDeadLineEntity(as));
+        deadLineRepository.save(assignment.toDeadLineEntity(as));
         
         return as;
 	}

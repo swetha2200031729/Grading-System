@@ -14,6 +14,7 @@ public class CreateCourseRegistrationDTO {
 	@JsonProperty("studentId")
 	private long studentId;
 	
+	
 	@JsonProperty("courseId")
 	private long CourseId;
 	

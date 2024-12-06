@@ -21,8 +21,11 @@ import com.jfsd.sdp.grade_management_system.entity.CourseEntity;
 import com.jfsd.sdp.grade_management_system.entity.UserEntity;
 import com.jfsd.sdp.grade_management_system.service.CourseService;
 
+import lombok.ToString;
+
 @Controller
 @RequestMapping("/courses")
+@ToString
 public class CourseController {
 
     @Autowired
@@ -40,8 +43,9 @@ public class CourseController {
 		 if (user == null) {
 	            throw new RuntimeException("User not found: " + username);
 	        }
-		 
-        model.addAttribute("courses", user.getEnrolledCourses());
+		 System.out.println(user.getEnrolledCourses().toString());
+       model.addAttribute("courses", user.getEnrolledCourses());
+        //model.addAttribute("courses", courseService.findAll());
         return "course-list";
     }
 

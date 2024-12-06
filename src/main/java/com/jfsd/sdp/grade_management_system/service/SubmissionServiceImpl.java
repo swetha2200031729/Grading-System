@@ -67,7 +67,10 @@ public class SubmissionServiceImpl implements SubmissionService {
 		 if (user == null) {
 	            throw new RuntimeException("User not found: " + username);
 	        }
-		
+		SubmissionEntity existingSubmission = submissionRepository.findBySubmittedByAndAssignmentEntity(user, submissionDTO.getAssignmentEntity());
+		if (existingSubmission != null) {
+			submissionRepository.deleteById(existingSubmission.getId());
+		}
 		SubmissionEntity se = submissionRepository.save(submissionDTO.toEntity(user));
 
 		return se;

@@ -1,7 +1,6 @@
 package com.jfsd.sdp.grade_management_system.DTO;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
