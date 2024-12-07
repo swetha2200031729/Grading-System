@@ -49,7 +49,7 @@ public class AssignmentController {
 
 	private boolean isUserFaculty() {
 		return SecurityContextHolder.getContext().getAuthentication().getAuthorities()
-				.contains(new SimpleGrantedAuthority("Faculty"));
+				.contains(new SimpleGrantedAuthority("ROLE_Faculty"));
 	}
 
 	@GetMapping("/list/{id}")

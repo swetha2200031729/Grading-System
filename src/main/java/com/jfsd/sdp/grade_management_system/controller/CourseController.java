@@ -36,15 +36,7 @@ public class CourseController {
     
     @GetMapping("/list")
     public String getAllCourses(Model model) {
-    // here get the currently logged in user and fetch user by username
-    	// then find enrolled courses and display them 
-    	String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		UserEntity user = userRepository.findByUsername(username);
-		 if (user == null) {
-	            throw new RuntimeException("User not found: " + username);
-	        }
-		 System.out.println(user.getEnrolledCourses().toString());
-       model.addAttribute("courses", user.getEnrolledCourses());
+       model.addAttribute("courses", courseService.findAll());
         //model.addAttribute("courses", courseService.findAll());
         return "course-list";
     }

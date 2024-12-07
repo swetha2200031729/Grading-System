@@ -7,6 +7,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.jfsd.sdp.grade_management_system.service.UserService;
 
@@ -34,19 +35,21 @@ public class SecurityConfig {
     			.requestMatchers("/e/**").hasRole("Student")
     			.requestMatchers("/faculty/**").hasRole("Faculty")
     			.requestMatchers("/admin/**").hasRole("Admin")
-    			.requestMatchers("/assignments/faculty/show-assignment-details/**").hasRole("Faculty")
+    			.requestMatchers("/assignments/faculty/show-assignment-details/8/**").hasRole("Faculty")
     			.anyRequest().authenticated()
 			)
 			.formLogin(form ->
 			        form.loginPage("/login")
 			            .loginProcessingUrl("/authenticate")
+			            .defaultSuccessUrl("/")
 			            .permitAll()
 			)
 			.logout(logout -> logout.permitAll())
 			.exceptionHandling(configurer ->
 			        configurer.accessDeniedPage("/access-denied")
 			);
-		
+    	
+    	http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 		return http.build();
     }
     

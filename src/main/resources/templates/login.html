@@ -18,28 +18,28 @@
                 <img src="images/img1.png" alt="Learning Illustration" class="w-3/4">
             </div>
             <div class="flex justify-between">
-                <button class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600">
-                    Login as a Student
-                </button>
-                <button class="border border-gray-500 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-gray-200">
-                    Login as a Teacher
-                </button>
+                <a th:href="@{/register}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600">
+                    Register as a Student
+                </a>
+                <a th:href="@{/registerTeacher}" class="border border-gray-500 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-gray-200">
+                    Register as a Teacher
+                </a>
             </div>
         </div>
-
+  
         <!-- Right Section -->
         <div class="w-1/2 bg-blue-100 p-8 flex flex-col justify-center items-center relative">
             <div class="absolute -top-10">
                 <img src="images/img2.png" alt="EduLearn Features" class="w-72">
             </div>
             <div class="mt-36">
-                <form method="POST" action="#" th:action="@{/authenticate}" class="flex flex-col items-center">
+                <form method="POST" th:action="@{/authenticate}" class="flex flex-col items-center">
                     <input type="text" name="username" placeholder="Username"
                         class="w-3/4 p-2 mb-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <input type="password" name="password" placeholder="Password"
                         class="w-3/4 p-2 mb-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="submit" value="Submit"
-                        class="w-3/4 bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 cursor-pointer">
+                    <button type="submit" value="Submit"
+                        class="w-3/4 bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 cursor-pointer">Login</button>
                 </form>
             </div>
         </div>
